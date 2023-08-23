@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'any' // Use the desired Node.js version
+            image // Use the desired Node.js version
             args '-u root' // Optional: Run Docker container as root
         }
     }
