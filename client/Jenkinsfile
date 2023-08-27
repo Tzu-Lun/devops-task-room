@@ -1,0 +1,46 @@
+pipeline {
+    agent {
+        docker {
+            image 'node:18' // Use the desired Node.js version
+        } 
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                // Get source code from a GitHub repository
+                git branch:'master', url:'https://github.com/Tzu-Lun/devops-task-room.git'
+            }
+        }
+        
+        stage('Install Dependencies') {
+            steps {
+                dir("./client/") {
+                    sh 'npm install'
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                dir("./client/") {
+                   sh 'npm run build'
+                }
+            }
+        }
+        stage('Deploy to AWS S3 bucket') {
+            steps {
+                withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
+                  sh 'aws s3 ls'
+                  sh 'aws s3 cp build s3://p3l1devops'
+                  sh 'aws s3 cp index.html s3://p3l1devops'
+                }
+            }
+        }
+    }
+}                   
+    post {
+        always {
+            cleanWs() // Clean up workspace
+        }
+    }
+}    
