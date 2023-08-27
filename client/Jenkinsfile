@@ -1,8 +1,6 @@
 pipeline {
     agent {
-        docker {
-            image 'node:16' // Use an official Node.js image
-        }
+        docker { image 'node:16.13.1-alpine' }
     }
 
     stages {
