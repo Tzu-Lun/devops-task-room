@@ -1,8 +1,7 @@
 pipeline {
     agent {
-        docker {any}
+        docker { image 'node:18.17.1-alpine3.18' }
     }
-
     stages {
         stage('Checkout') {
             steps {
@@ -41,4 +40,4 @@ pipeline {
             cleanWs() // Clean up workspace
         }
     }
-
+    
