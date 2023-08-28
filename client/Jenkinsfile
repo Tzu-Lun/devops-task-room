@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Deploy to AWS S3 bucket') {
             steps {
-              withAWS(credentials: 'aws-p3l1-jenkins-credential', region: 'ap-southeast-2'){
+               withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'p3l1-jenkins-aws-credential-s3', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                   sh 'aws s3 ls'
                   sh 'aws s3 cp build s3://p3l1devops'
                   sh 'aws s3 cp index.html s3://p3l1devops'
