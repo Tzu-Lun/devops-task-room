@@ -34,7 +34,7 @@ pipeline {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-p3l1-jenkins-credential', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     sh 'aws s3 ls'
-                    sh 'aws s3 cp build/index.html s3://p3l1devops/
+                    sh 'aws s3 cp build/index.html s3://p3l1devops/‘
                 }  
             }
         }    
