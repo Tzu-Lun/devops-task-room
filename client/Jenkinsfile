@@ -35,7 +35,7 @@ pipeline {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-p3l1-jenkins-credential', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     dir("./client/") {
                       sh 'aws s3 ls'
-                      sh 'aws s3 sync client/build s3://p3l1devops/'
+                      sh 'aws s3 sync build s3://p3l1devops/'
                     }
                 }
             }
